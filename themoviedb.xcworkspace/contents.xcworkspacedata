@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:APIGate/APIGate.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:DataRepository/DataRepository.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BusinessLayer/BusinessLayer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:themoviedb.xcodeproj">
+   </FileRef>
+</Workspace>
