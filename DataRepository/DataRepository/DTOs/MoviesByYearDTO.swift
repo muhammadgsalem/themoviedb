@@ -8,10 +8,24 @@
 
 public struct MoviesByYearDTO {
     public let years: [Int]  // Sorted years for easy access
-    public let moviesByYear: [Int: [MovieDTO]]
-    public let totalResults: Int
+    public var moviesByYear: [Int: [MovieDTO]]
+    public var totalResults: Int
     public let currentPage: Int
-    public let totalPages: Int
+    public var totalPages: Int
+    
+    public init(
+        years: [Int] = [],
+        moviesByYear: [Int: [MovieDTO]] = [:],
+        totalResults: Int = 0,
+        currentPage: Int = 1,
+        totalPages: Int = 1
+    ) {
+        self.years = years
+        self.moviesByYear = moviesByYear
+        self.totalResults = totalResults
+        self.currentPage = currentPage
+        self.totalPages = totalPages
+    }
     
     public init(response: MovieListResponse) {
         let groupedMovies = Dictionary(grouping: response.results) { movie in
@@ -27,6 +41,20 @@ public struct MoviesByYearDTO {
         self.totalResults = response.totalResults
         self.currentPage = response.page
         self.totalPages = response.totalPages
+    }
+    
+    public static func == (lhs: MoviesByYearDTO, rhs: MoviesByYearDTO) -> Bool {
+        lhs.currentPage == rhs.currentPage
+    }
+    
+    public static var empty: MoviesByYearDTO {
+        MoviesByYearDTO(
+            years: [],
+            moviesByYear: [:],
+            totalResults: 0,
+            currentPage: 1,
+            totalPages: 1
+        )
     }
 }
 
@@ -73,5 +101,10 @@ public struct MovieDTO: Identifiable {
         self.voteCount = movie.voteCount
         self.genres = movie.genreIds
         self.popularity = movie.popularity
+    }
+    
+    public static func == (lhs: MovieDTO, rhs: MovieDTO) -> Bool {
+        lhs.id == rhs.id
+
     }
 }

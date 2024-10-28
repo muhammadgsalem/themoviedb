@@ -28,7 +28,7 @@ final class DependencyContainer: @preconcurrency DependencyContainerProtocol {
     }
     
     @MainActor func makeMoviesListViewModel() -> MoviesListViewModelProtocol {
-        MoviesListViewModel(fetchPopularMoviesUseCase: businessLayerDIContainer.makeFetchPopularMoviesUseCase())
+        MoviesListViewModel(fetchPopularMoviesUseCase: businessLayerDIContainer.makeFetchPopularMoviesUseCase(),searchMoviesUseCase: businessLayerDIContainer.makeSearchMoviesUseCase())
     }
     
     @MainActor func makeMoviesListViewController(coordinator: MoviesCoordinator, imageLoadingService: ImageCacheService) -> MoviesListViewController {
