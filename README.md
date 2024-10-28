@@ -98,7 +98,7 @@ The project follows Clean Architecture principles, utilizing the MVVM-C (Model-V
 - Xcode 14.0+
 - iOS 14.0+
 - Swift 5.5+
-- TMDb API Key
+- TMDb API Key "This is intended for the production concept, but since it’s part of a POC, it can be ignored"
  
 ### Installation
 1. Clone the repository
