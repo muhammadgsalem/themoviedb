@@ -18,6 +18,8 @@
 		953109842C8889DC00CCD8DD /* BusinessLayerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953109832C8889DC00CCD8DD /* BusinessLayerDIContainer.swift */; };
 		959753492CCF9CC10091A20B /* SearchMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753482CCF9CC00091A20B /* SearchMoviesUseCaseProtocol.swift */; };
 		9597534E2CCF9F450091A20B /* SearchMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753462CCF9C9A0091A20B /* SearchMoviesUseCase.swift */; };
+		959753D12CCFC74A0091A20B /* FetchSimilarMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753D02CCFC7480091A20B /* FetchSimilarMoviesUseCase.swift */; };
+		959753D32CCFC7510091A20B /* FetchSimilarMoviesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753D22CCFC74D0091A20B /* FetchSimilarMoviesUseCaseProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		953109832C8889DC00CCD8DD /* BusinessLayerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLayerDIContainer.swift; sourceTree = "<group>"; };
 		959753462CCF9C9A0091A20B /* SearchMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesUseCase.swift; sourceTree = "<group>"; };
 		959753482CCF9CC00091A20B /* SearchMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
+		959753D02CCFC7480091A20B /* FetchSimilarMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSimilarMoviesUseCase.swift; sourceTree = "<group>"; };
+		959753D22CCFC74D0091A20B /* FetchSimilarMoviesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSimilarMoviesUseCaseProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +141,9 @@
 		953108932C86836400CCD8DD /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				959753482CCF9CC00091A20B /* SearchMoviesUseCaseProtocol.swift */,
-				959753462CCF9C9A0091A20B /* SearchMoviesUseCase.swift */,
-				9531092E2C87891F00CCD8DD /* FetchPopularMoviesUseCaseProtocol.swift */,
-				953108942C8687CA00CCD8DD /* FetchPopularMoviesUseCase.swift */,
+				959753DA2CCFCC350091A20B /* FetchPopularMovies */,
+				959753D82CCFCC180091A20B /* FetchSimilarMovies */,
+				959753D92CCFCC260091A20B /* SearchMovies */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -159,6 +162,33 @@
 				953109832C8889DC00CCD8DD /* BusinessLayerDIContainer.swift */,
 			);
 			path = DependencyInjectionContainer;
+			sourceTree = "<group>";
+		};
+		959753D82CCFCC180091A20B /* FetchSimilarMovies */ = {
+			isa = PBXGroup;
+			children = (
+				959753D22CCFC74D0091A20B /* FetchSimilarMoviesUseCaseProtocol.swift */,
+				959753D02CCFC7480091A20B /* FetchSimilarMoviesUseCase.swift */,
+			);
+			path = FetchSimilarMovies;
+			sourceTree = "<group>";
+		};
+		959753D92CCFCC260091A20B /* SearchMovies */ = {
+			isa = PBXGroup;
+			children = (
+				959753482CCF9CC00091A20B /* SearchMoviesUseCaseProtocol.swift */,
+				959753462CCF9C9A0091A20B /* SearchMoviesUseCase.swift */,
+			);
+			path = SearchMovies;
+			sourceTree = "<group>";
+		};
+		959753DA2CCFCC350091A20B /* FetchPopularMovies */ = {
+			isa = PBXGroup;
+			children = (
+				9531092E2C87891F00CCD8DD /* FetchPopularMoviesUseCaseProtocol.swift */,
+				953108942C8687CA00CCD8DD /* FetchPopularMoviesUseCase.swift */,
+			);
+			path = FetchPopularMovies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +301,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				959753D32CCFC7510091A20B /* FetchSimilarMoviesUseCaseProtocol.swift in Sources */,
 				9597534E2CCF9F450091A20B /* SearchMoviesUseCase.swift in Sources */,
+				959753D12CCFC74A0091A20B /* FetchSimilarMoviesUseCase.swift in Sources */,
 				953109812C88896E00CCD8DD /* BusinessError.swift in Sources */,
 				9531092F2C87891F00CCD8DD /* FetchPopularMoviesUseCaseProtocol.swift in Sources */,
 				959753492CCF9CC10091A20B /* SearchMoviesUseCaseProtocol.swift in Sources */,

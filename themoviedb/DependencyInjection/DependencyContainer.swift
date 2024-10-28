@@ -51,10 +51,14 @@ final class DependencyContainer: @preconcurrency DependencyContainerProtocol {
                                               imageLoadingService: imageLoadingService)
     }
     
-    func makeMovieDetailsView(movie: MovieDTO, imageLoadingService: ImageCacheService, onBackActionSelected: @escaping () -> Void) -> MovieDetailsView {
-        MovieDetailsView(movie: movie,
-                             onBackActionSelected: onBackActionSelected,
-                             imageLoadingService: imageLoadingService)
+    @MainActor func makeMovieDetailsView(movie: MovieDTO, imageLoadingService: ImageCacheService, onBackActionSelected: @escaping () -> Void) -> MovieDetailsView {
+        let viewModel = makeMoviesDetailsViewModel(movie: movie)
+        return MovieDetailsView(movie: movie, viewModel: viewModel,
+                         imageLoadingService: imageLoadingService, onBackActionSelected: onBackActionSelected)
+    }
+    
+    @MainActor func makeMoviesDetailsViewModel(movie: MovieDTO) -> MovieDetailsViewModelProtocol {
+        MovieDetailsViewModel(fetchSimilarMoviesUseCase: businessLayerDIContainer.makeFetchSimilarMoviesUseCase(), movie: movie)
     }
     
     func makeImageCache() -> ImageCacheService {

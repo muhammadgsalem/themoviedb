@@ -46,14 +46,14 @@ final class MoviesListViewModel: MoviesListViewModelProtocol {
          searchMoviesUseCase: SearchMoviesUseCaseProtocol,
          retryPolicy: RetryPolicy = DefaultRetryPolicy(),
          cacheManager: MoviesCacheManager = MoviesCacheManager(),
-         dataManager: MoviesDataManager = MoviesDataManager())
+         dataManager: MoviesDataManager = MoviesDataManager(), paginationState: PaginationState = PaginationState())
     {
         self.fetchPopularMoviesUseCase = fetchPopularMoviesUseCase
         self.searchMoviesUseCase = searchMoviesUseCase
         self.retryPolicy = retryPolicy
         self.cacheManager = cacheManager
         self.dataManager = dataManager
-        self.paginationState = PaginationState()
+        self.paginationState = paginationState
     }
     
     func loadMoreMoviesIfNeeded(for index: Int) {

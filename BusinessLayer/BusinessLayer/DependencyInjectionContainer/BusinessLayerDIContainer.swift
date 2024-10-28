@@ -24,4 +24,8 @@ public final class BusinessLayerDIContainer {
     public func makeSearchMoviesUseCase() -> SearchMoviesUseCaseProtocol {
         SearchMoviesUseCase(movieRepository: dataRepositoryDIContainer.makeMovieRepository())
     }
+    
+    public func makeFetchSimilarMoviesUseCase() -> FetchSimilarMoviesUseCaseProtocol {
+        FetchSimilarMoviesUseCase(movieRepository: dataRepositoryDIContainer.makeMovieRepository())
+    }
 }
