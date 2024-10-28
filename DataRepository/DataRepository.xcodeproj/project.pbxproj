@@ -22,6 +22,8 @@
 		953109642C8875C500CCD8DD /* APIGate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953109622C8875C500CCD8DD /* APIGate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9531097B2C88854C00CCD8DD /* DataRepositoryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531097A2C88854C00CCD8DD /* DataRepositoryDIContainer.swift */; };
 		9531097E2C88863400CCD8DD /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531097D2C88863400CCD8DD /* RepositoryError.swift */; };
+		959753E22CCFD8830091A20B /* CreditResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753E12CCFD8830091A20B /* CreditResponse.swift */; };
+		959753E42CCFD8D30091A20B /* CastDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959753E32CCFD8D30091A20B /* CastDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		953109622C8875C500CCD8DD /* APIGate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIGate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9531097A2C88854C00CCD8DD /* DataRepositoryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryDIContainer.swift; sourceTree = "<group>"; };
 		9531097D2C88863400CCD8DD /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		959753E12CCFD8830091A20B /* CreditResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditResponse.swift; sourceTree = "<group>"; };
+		959753E32CCFD8D30091A20B /* CastDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 		9531091E2C87879900CCD8DD /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				959753E32CCFD8D30091A20B /* CastDTO.swift */,
+				959753E12CCFD8830091A20B /* CreditResponse.swift */,
 				950CFF432CCE8EC100961BD5 /* MovieListResponse.swift */,
 				950CFF412CCE8D3000961BD5 /* MoviesByYearDTO.swift */,
 			);
@@ -315,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				950CFF492CCEDDE000961BD5 /* APIConfigurationProtocol.swift in Sources */,
+				959753E22CCFD8830091A20B /* CreditResponse.swift in Sources */,
 				950CFF3E2CCE8D0D00961BD5 /* MovieRepository.swift in Sources */,
 				953108D62C87691300CCD8DD /* DataRepository.docc in Sources */,
 				950CFF402CCE8D1D00961BD5 /* MovieRepositoryProtocol.swift in Sources */,
@@ -323,6 +330,7 @@
 				950CFF442CCE8EC100961BD5 /* MovieListResponse.swift in Sources */,
 				950CFF4B2CCEDE0700961BD5 /* APIConfiguration.swift in Sources */,
 				950CFF422CCE8D3000961BD5 /* MoviesByYearDTO.swift in Sources */,
+				959753E42CCFD8D30091A20B /* CastDTO.swift in Sources */,
 				950CFF3C2CCE8CF000961BD5 /* MovieEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

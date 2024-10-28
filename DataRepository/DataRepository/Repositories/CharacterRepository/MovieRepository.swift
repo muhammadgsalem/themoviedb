@@ -30,6 +30,13 @@ public final class MovieRepository: MovieRepositoryProtocol {
         let response: MovieListResponse = try await networking.request(endpoint)
         return MoviesByYearDTO(response: response)
     }
+    
+    public func fetchMovieCredits(forMovie id: Int) async throws -> CastDTO {
+        let endpoint = MovieEndpoint.credits(movieId: id)
+        let response: CreditResponse = try await networking.request(endpoint)
+        return CastDTO(from: response)
+    }
+    
 }
 
 // MARK: - Example Usage Extension
