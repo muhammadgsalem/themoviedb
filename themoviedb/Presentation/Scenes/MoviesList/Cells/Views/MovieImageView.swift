@@ -17,7 +17,7 @@ struct MovieImageView: View {
     }
 }
 
-struct CharacterImageView_Previews: PreviewProvider {
+struct MovieImageView_Previews: PreviewProvider {
     static var previews: some View {
         MovieImageView(imageURL: URL(string: "https://example.com/image.jpg")!, imageLoadingService: DependencyContainer.shared.makeImageCache())
     }
