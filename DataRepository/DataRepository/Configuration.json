@@ -1,0 +1,5 @@
+{
+    "TMDB_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYjg5ZWY0ZTRlOGZmYWUyMGI2OWVjM2UwYjA0OTFlMSIsIm5iZiI6MTcyOTkzNjI4NS4wNzc2NDksInN1YiI6IjY3MWNiYWU4ZTgzM2Q5MmVmMDYwMzliOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9uxpGNg9wZ0Lc8h3S_0lDiW0iugEjNmyp-aD1NN-2zE",
+    "TMDB_BASE_URL": "https://api.themoviedb.org/3",
+    "TMDB_IMAGE_BASE_URL": "https://image.tmdb.org/t/p"
+}
