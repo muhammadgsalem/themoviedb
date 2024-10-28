@@ -7,5 +7,5 @@
 
 
 protocol MoviesDetailViewModelDelegate: AnyObject {
-    func viewModelDidUpdateState(_ viewModel: MovieDetailsViewModelProtocol, state: ViewState)
+    func viewModelDidUpdateState(_ viewModel: MovieDetailsViewModel, state: ViewState)
 }

@@ -9,29 +9,28 @@ import DataRepository
 import SwiftUI
 
 struct MovieDetailsView: View {
-    @StateObject private var viewModel: MovieDetailsViewModelWrapper
+    @StateObject private var viewModel: MovieDetailsViewModel
     let movie: MovieDTO
     let onBackActionSelected: () -> Void
     let imageLoadingService: ImageCacheService
-
+    
     init(movie: MovieDTO,
-         viewModel: MovieDetailsViewModelProtocol,
+         viewModel: MovieDetailsViewModel,
          imageLoadingService: ImageCacheService,
          onBackActionSelected: @escaping () -> Void)
     {
         self.movie = movie
-        self._viewModel = StateObject(wrappedValue: MovieDetailsViewModelWrapper(wrapped: viewModel))
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.imageLoadingService = imageLoadingService
         self.onBackActionSelected = onBackActionSelected
     }
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
                 movieImageView
                 movieInfoView
                 
-                // Similar Movies Section
                 if !viewModel.movies.moviesByYear.isEmpty {
                     similarMoviesSection
                 }
@@ -76,6 +75,31 @@ struct MovieDetailsView: View {
         .padding(.leading, 20)
     }
     
+    private var movieInfoView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Title and Metadata
+            VStack(alignment: .leading, spacing: 4) {
+                Text(movie.title)
+                    .font(.title)
+                    .bold()
+                
+                MovieMetadataView(
+                    year: movie.releaseYear,
+                    rating: movie.formattedRating,
+                    voteCount: movie.voteCount,
+                    font: .subheadline
+                )
+            }
+            
+            // Overview
+            Text(movie.overview)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
+        }
+        .padding()
+    }
+    
     private var similarMoviesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Similar Movies")
@@ -85,58 +109,30 @@ struct MovieDetailsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    // Sort all movies by popularity before taking top 5
-                    let allMovies = viewModel.movies.moviesByYear.values
+                    let similarMovies = viewModel.movies.moviesByYear.values
                         .flatMap { $0 }
                         .sorted { $0.popularity > $1.popularity }
                         .prefix(5)
-                                    
-                    ForEach(Array(allMovies)) { movie in
-                        SimilarMovieCard(movie: movie,
-                                         imageLoadingService: imageLoadingService)
+                    
+                    ForEach(Array(similarMovies)) { movie in
+                        SimilarMovieView(
+                            movie: movie,
+                            imageLoadingService: imageLoadingService,
+                            cast: viewModel.movieCasts[movie.id]
+                        )
+                        .onAppear {
+                            if viewModel.movieCasts[movie.id] == nil {
+                                Task {
+                                    await viewModel.loadCreditsForMovie(movie.id)
+                                }
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal)
             }
         }
         .padding(.top, 24)
-    }
-
-    private var movieInfoView: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                movieBasicInfo
-                Spacer()
-                    .shadow(radius: 5)
-            }
-            
-            movieOverviewInfo
-        }
-        .padding()
-    }
-    
-    private var movieBasicInfo: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(movie.title)
-                .font(.title)
-                .bold()
-            HStack(spacing: 2) {
-                Text("\(movie.releaseYear)")
-                Text("• \(movie.formattedRating)")
-                Text("• \(movie.voteCount)")
-                    .foregroundColor(.gray)
-            }
-            .font(.subheadline)
-        }
-    }
-    
-    private var movieOverviewInfo: some View {
-        HStack(spacing: 4) {
-            Text(movie.overview)
-                .fontWeight(.semibold)
-                .foregroundColor(.gray)
-        }
-        .font(.title3)
     }
     
     private func performBackAction() {
@@ -151,3 +147,18 @@ struct MovieDetailsView: View {
         }
     }
 }
+
+//struct MovieDetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieDetailsView(
+//            movie: MovieDTO.mock,
+//            viewModel: MovieDetailsViewModel(
+//                fetchSimilarMoviesUseCase: MockFetchSimilarMoviesUseCase(),
+//                movieRepository: MockMovieRepository(),
+//                movie: .mock
+//            ),
+//            imageLoadingService: MockImageCacheService(),
+//            onBackActionSelected: {}
+//        )
+//    }
+//}
