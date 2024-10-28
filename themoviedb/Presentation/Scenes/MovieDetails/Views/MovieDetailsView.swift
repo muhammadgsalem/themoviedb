@@ -1,34 +1,56 @@
 //
-//  CharacterDetailsView.swift
+//  MovieDetailsView.swift
 //  themoviedb
 //
 //  Created by Jimmy on 28/10/2024.
 //
 
-
 import DataRepository
 import SwiftUI
 
 struct MovieDetailsView: View {
+    @StateObject private var viewModel: MovieDetailsViewModel
     let movie: MovieDTO
     let onBackActionSelected: () -> Void
     let imageLoadingService: ImageCacheService
-
+    
+    init(movie: MovieDTO,
+         viewModel: MovieDetailsViewModel,
+         imageLoadingService: ImageCacheService,
+         onBackActionSelected: @escaping () -> Void)
+    {
+        self.movie = movie
+        self._viewModel = StateObject(wrappedValue: viewModel)
+        self.imageLoadingService = imageLoadingService
+        self.onBackActionSelected = onBackActionSelected
+    }
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
                 movieImageView
                 movieInfoView
+                
+                if !viewModel.movies.moviesByYear.isEmpty {
+                    similarMoviesSection
+                }
             }
         }
         .edgesIgnoringSafeArea(.top)
-        .onAppear(perform: adjustScrollViewBehavior)
+        .onAppear {
+            adjustScrollViewBehavior()
+            Task {
+                await viewModel.loadsSimilarMovies()
+            }
+        }
     }
     
     private var movieImageView: some View {
         ZStack(alignment: .topLeading) {
             if let url = movie.posterURL {
                 MovieAsyncImage(url: url, imageCache: imageLoadingService)
+                    .frame(height: 400)
+                    .frame(maxWidth: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding(.bottom, 10)
                 backButton
@@ -55,39 +77,62 @@ struct MovieDetailsView: View {
     
     private var movieInfoView: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                movieBasicInfo
-                Spacer()
-                    .shadow(radius: 5)
+            // Title and Metadata
+            VStack(alignment: .leading, spacing: 4) {
+                Text(movie.title)
+                    .font(.title)
+                    .bold()
+                
+                MovieMetadataView(
+                    year: movie.releaseYear,
+                    rating: movie.formattedRating,
+                    voteCount: movie.voteCount,
+                    font: .subheadline
+                )
             }
             
-            movieLocationInfo
+            // Overview
+            Text(movie.overview)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
         }
         .padding()
     }
     
-    private var movieBasicInfo: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(movie.title)
-                .font(.title)
-                .bold()
-            HStack(spacing: 2) {
-                Text("\(movie.releaseYear)")
-                Text("• \(movie.formattedRating)")
-                Text("• \(movie.voteCount)")
-                    .foregroundColor(.gray)
+    private var similarMoviesSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Similar Movies")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.horizontal)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    let similarMovies = viewModel.movies.moviesByYear.values
+                        .flatMap { $0 }
+                        .sorted { $0.popularity > $1.popularity }
+                        .prefix(5)
+                    
+                    ForEach(Array(similarMovies)) { movie in
+                        SimilarMovieView(
+                            movie: movie,
+                            imageLoadingService: imageLoadingService,
+                            cast: viewModel.movieCasts[movie.id]
+                        )
+                        .onAppear {
+                            if viewModel.movieCasts[movie.id] == nil {
+                                Task {
+                                    await viewModel.loadCreditsForMovie(movie.id)
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal)
             }
-            .font(.subheadline)
         }
-    }
-    
-    private var movieLocationInfo: some View {
-        HStack(spacing: 4) {
-            Text(movie.overview)
-                .fontWeight(.semibold)
-                .foregroundColor(.gray)
-        }
-        .font(.title3)
+        .padding(.top, 24)
     }
     
     private func performBackAction() {
@@ -102,3 +147,18 @@ struct MovieDetailsView: View {
         }
     }
 }
+
+//struct MovieDetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieDetailsView(
+//            movie: MovieDTO.mock,
+//            viewModel: MovieDetailsViewModel(
+//                fetchSimilarMoviesUseCase: MockFetchSimilarMoviesUseCase(),
+//                movieRepository: MockMovieRepository(),
+//                movie: .mock
+//            ),
+//            imageLoadingService: MockImageCacheService(),
+//            onBackActionSelected: {}
+//        )
+//    }
+//}

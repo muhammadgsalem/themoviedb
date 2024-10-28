@@ -11,3 +11,4 @@ import Foundation
 protocol MoviesListViewModelDelegate: AnyObject {
     func viewModelDidUpdateState(_ viewModel: MoviesListViewModelProtocol, state: ViewState)
 }
+
