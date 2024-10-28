@@ -99,10 +99,10 @@ The project follows Clean Architecture principles, utilizing the MVVM-C (Model-V
 - iOS 14.0+
 - Swift 5.5+
 - TMDb API Key
-
+ 
 ### Installation
 1. Clone the repository
-2. Create a `Configuration.json` file in the project root with your TMDb API key
+2. Create a `Configuration.json` file in the project root with your TMDb API key "This is intended for the production concept, but since it’s part of a POC, it can be ignored"
 3. Open `themoviedb.xcodeproj` in Xcode
 4. Build and run the project
 
