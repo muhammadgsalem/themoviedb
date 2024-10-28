@@ -21,10 +21,10 @@ class AppCoordinator: @preconcurrency Coordinator {
     }
     
     @MainActor private func showMoviesList() {
-        let charactersCoordinator = MoviesCoordinator(navigationController: navigationController)
-        charactersCoordinator.parentCoordinator = self
-        childCoordinators.append(charactersCoordinator)
-        charactersCoordinator.start()
+        let moviesCoordinator = MoviesCoordinator(navigationController: navigationController)
+        moviesCoordinator.parentCoordinator = self
+        childCoordinators.append(moviesCoordinator)
+        moviesCoordinator.start()
     }
     
     func childDidFinish(_ child: Coordinator?) {

@@ -24,8 +24,8 @@ class MoviesCoordinator: @preconcurrency Coordinator {
         navigationController.pushViewController(moviesVC, animated: false)
     }
     
-    func showCharacterDetails(_ character: Character) {
-        let detailCoordinator = MovieDetailCoordinator(navigationController: navigationController, character: character)
+    func showCharacterDetails(_ movie: MovieDTO) {
+        let detailCoordinator = MovieDetailCoordinator(navigationController: navigationController, movie: movie)
         detailCoordinator.parentCoordinator = self
         childCoordinators.append(detailCoordinator)
         detailCoordinator.start()

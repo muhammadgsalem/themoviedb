@@ -75,7 +75,7 @@ struct MovieDetailsView: View {
                 Text("\(movie.releaseYear)")
                 Text("• \(movie.formattedRating)")
                 Text("• \(movie.voteCount)")
-                    .foregroundStyle(.gray)
+                    .foregroundColor(.gray)
             }
             .font(.subheadline)
         }
@@ -85,7 +85,7 @@ struct MovieDetailsView: View {
         HStack(spacing: 4) {
             Text(movie.overview)
                 .fontWeight(.semibold)
-                .foregroundStyle(.gray)
+                .foregroundColor(.gray)
         }
         .font(.title3)
     }
