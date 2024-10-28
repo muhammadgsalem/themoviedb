@@ -20,4 +20,8 @@ public final class BusinessLayerDIContainer {
     public func makeFetchPopularMoviesUseCase() -> FetchPopularMoviesUseCaseProtocol {
         FetchPopularMoviesUseCase(movieRepository: dataRepositoryDIContainer.makeMovieRepository())
     }
+    
+    public func makeSearchMoviesUseCase() -> SearchMoviesUseCaseProtocol {
+        SearchMoviesUseCase(movieRepository: dataRepositoryDIContainer.makeMovieRepository())
+    }
 }

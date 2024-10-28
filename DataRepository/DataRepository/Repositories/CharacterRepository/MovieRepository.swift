@@ -19,8 +19,8 @@ public final class MovieRepository: MovieRepositoryProtocol {
         return MoviesByYearDTO(response: response)
     }
     
-    public func searchMovies(query: String) async throws -> MoviesByYearDTO {
-        let endpoint = MovieEndpoint.search(query: query)
+    public func searchMovies(query: String, page: Int) async throws -> MoviesByYearDTO {
+        let endpoint = MovieEndpoint.search(query: query, page: page)
         let response: MovieListResponse = try await networking.request(endpoint)
         return MoviesByYearDTO(response: response)
     }

@@ -7,6 +7,7 @@
 
 
 import Foundation
+/// Protocol for view model state updates
 protocol MoviesListViewModelDelegate: AnyObject {
-    func viewModelDidUpdateState(_ viewModel: MoviesListViewModel, state: ViewState)
+    func viewModelDidUpdateState(_ viewModel: MoviesListViewModelProtocol, state: ViewState)
 }
